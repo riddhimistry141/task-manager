@@ -1,4 +1,5 @@
 const form = document.getElementById("task-form");
+const taskApp = document.getElementById("task-app");
 const taskInput = document.getElementById("task-input");
 const taskList = document.getElementById("task-list");
 const noTask = document.getElementById("no-taskMsg");
@@ -6,6 +7,7 @@ const noTask = document.getElementById("no-taskMsg");
 const confirmModal = document.getElementById("confirm-modal");
 const cancelDeleteButton = document.getElementById("cancel-delete");
 const confirmDeleteButton = document.getElementById("confirm-delete");
+let lastFocusedElement = null;
 
 //secureat key
 const STORAGE_KEY = "task-manager-tasks";
@@ -94,7 +96,8 @@ function renderTasks() {
     deleteButton.textContent = "Delete";
 
     const completeButton = document.createElement("button");
-    completeButton.textContent = "Complete";
+    completeButton.textContent = tasks[i].completed ? "Mark pending" : "Complete";
+    completeButton.setAttribute("aria-pressed", String(tasks[i].completed));
 
     // Edit a task
     editButton.addEventListener("click", function () {
@@ -285,6 +288,9 @@ clearCompletedButton.addEventListener("click", function () {
     return;
   }
 
+  lastFocusedElement = document.activeElement;
+  taskApp.inert = true;
+  taskApp.setAttribute("aria-hidden", "true");
   confirmModal.hidden = false;
   cancelDeleteButton.focus();
 });
@@ -322,6 +328,20 @@ successMessage.hidden = true;
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" && !confirmModal.hidden) {
     closeConfirmModal();
+    return;
+  }
+
+  if (event.key === "Tab" && !confirmModal.hidden) {
+    const modalControls = [cancelDeleteButton, confirmDeleteButton];
+    const currentIndex = modalControls.indexOf(document.activeElement);
+
+    if (event.shiftKey && currentIndex <= 0) {
+      event.preventDefault();
+      modalControls[modalControls.length - 1].focus();
+    } else if (!event.shiftKey && currentIndex === modalControls.length - 1) {
+      event.preventDefault();
+      modalControls[0].focus();
+    }
   }
 });
 
@@ -333,5 +353,12 @@ confirmModal.addEventListener("click", function (event) {
 
 function closeConfirmModal() {
   confirmModal.hidden = true;
-  clearCompletedButton.focus();
+  taskApp.inert = false;
+  taskApp.removeAttribute("aria-hidden");
+
+  if (lastFocusedElement && document.contains(lastFocusedElement)) {
+    lastFocusedElement.focus();
+  } else {
+    clearCompletedButton.focus();
+  }
 }

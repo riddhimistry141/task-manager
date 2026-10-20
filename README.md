@@ -2,12 +2,14 @@
 
 A responsive task management web application built using HTML, CSS, and vanilla JavaScript. Create, edit, delete, filter, and track tasks with persistent browser storage.
 
+**[Live Demo](https://riddhimistry141.github.io/task-manager/)** · **[View the source on GitHub](https://github.com/riddhimistry141/task-manager)**
+
 ## Features
 
 - **Add Tasks:** Create tasks with input validation.
 - **Edit Tasks:** Update task descriptions or cancel changes.
 - **Delete Tasks:** Remove individual tasks.
-- **Mark Complete:** Toggle tasks between completed and pending.
+- **Mark Complete:** Toggle tasks between completed and pending with a clearly labeled action.
 - **Filter Tasks:** View all, pending, or completed tasks.
 - **Task Counter:** Track total, completed, and pending tasks.
 - **Clear Completed:** Remove all completed tasks with a custom confirmation popup.
@@ -62,9 +64,11 @@ task-manager/
 
 Tasks are saved in the browser's `localStorage`. They remain available after refreshing the page in the same browser and origin. Clearing browser storage or using a different browser may remove or hide the saved tasks.
 
+This project has no backend, account system, or cross-device synchronization.
+
 ## Testing
 
-The implemented features have been manually tested, including task operations, filters, counters, persistence, responsive layout, and custom confirmation popup behavior.
+The implemented features have been manually tested, including task operations, filters, counters, persistence, responsive layout, keyboard navigation, and custom confirmation popup behavior.
 
 ## Future Improvements
 

@@ -8,7 +8,7 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <main class="task-manager">
+    <main id="task-app" class="task-manager">
       <h1>Task Manager</h1>
 
       <form id="task-form">
@@ -34,31 +34,31 @@
 
       <p id="success-message" role="status" aria-live="polite" hidden></p>
 
-      <div id="confirm-modal" class="modal-overlay" hidden>
-        <div
-          class="modal-box"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-          aria-describedby="modal-message"
-        >
-          <h2 id="modal-title">Clear completed tasks?</h2>
-
-          <p id="modal-message">
-            Are you sure you want to delete all completed tasks? This action
-            cannot be undone.
-          </p>
-
-          <div class="modal-actions">
-            <button id="cancel-delete" type="button">Cancel</button>
-
-            <button id="confirm-delete" type="button">Delete Completed</button>
-          </div>
-        </div>
-      </div>
-
       <p id="no-taskMsg">No tasks.</p>
       <ul id="task-list"></ul>
     </main>
+
+    <div id="confirm-modal" class="modal-overlay" hidden>
+      <div
+        class="modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-message"
+        tabindex="-1"
+      >
+        <h2 id="modal-title">Clear completed tasks?</h2>
+
+        <p id="modal-message">
+          Are you sure you want to delete all completed tasks? This action
+          cannot be undone.
+        </p>
+
+        <div class="modal-actions">
+          <button id="cancel-delete" type="button">Cancel</button>
+          <button id="confirm-delete" type="button">Delete Completed</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
