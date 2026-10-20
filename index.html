@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="task-manager">
+      <h1>Task Manager</h1>
+
+      <form id="task-form">
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Enter a task..."
+          aria-label="Enter a task"
+          required
+        />
+        <button type="submit">Add Task</button>
+      </form>
+
+      <div class="task-filters">
+        <button type="button" data-filter="all">All</button>
+        <button type="button" data-filter="pending">Pending</button>
+        <button type="button" data-filter="completed">Completed</button>
+      </div>
+
+      <p id="task-counter">Total: 0 | Completed: 0 | Pending: 0</p>
+
+      <button id="clear-completed">Clear Completed</button>
+
+      <p id="success-message" role="status" aria-live="polite" hidden></p>
+
+      <div id="confirm-modal" class="modal-overlay" hidden>
+        <div
+          class="modal-box"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-message"
+        >
+          <h2 id="modal-title">Clear completed tasks?</h2>
+
+          <p id="modal-message">
+            Are you sure you want to delete all completed tasks? This action
+            cannot be undone.
+          </p>
+
+          <div class="modal-actions">
+            <button id="cancel-delete" type="button">Cancel</button>
+
+            <button id="confirm-delete" type="button">Delete Completed</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="no-taskMsg">No tasks.</p>
+      <ul id="task-list"></ul>
+    </main>
+  </body>
+</html>
